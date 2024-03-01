@@ -82,44 +82,34 @@ class ToyDrone {
     let attackX = this.x;
     let attackY = this.y;
 
-    switch (this.direction) {
-      case 'NORTH':
-        attackY += 2;
-        break;
-      case 'EAST':
-        attackX += 2;
-        break;
-      case 'SOUTH':
-        attackY -= 2;
-        break;
-      case 'WEST':
-        attackX -= 2;
-        break;
+    let attackMessage;
+    if (this.isValidPosition(attackX, attackY)) {
+      attackMessage = ` Projectile Fired At ${attackX},${attackY}`;
+    } else {
+      attackMessage = 'No free spaces for attack';
     }
 
-    if (this.isValidPosition(attackX, attackY)) {
-      console.log(`Projectile fired at ${attackX},${attackY}`);
-    } else {
-      console.log('No free spaces for attack');
-    }
+    // Update the UI element with the attack information
+    document.getElementById('attackInfo').innerText = attackMessage;
+
+    // Clear the message after 4 seconds
+    setTimeout(function () {
+      document.getElementById('attackInfo').innerText = '';
+    }, 4000); // 4000 milliseconds = 4 seconds
   }
 }
 
+// Function to update drone position on the page
 function updateDronePosition() {
-  // Get a reference to the drone element
-  const droneElement = document.getElementById('drone');
-
-  // Update the drone's position on the page based on its x and y coordinates
-  // and direction
-  droneElement.style.left = `${drone.x * 50}px`; // Assuming each grid cell is 50px wide
-  droneElement.style.top = `${drone.y * 50}px`; // Assuming each grid cell is 50px tall
-  // You might also rotate the drone element based on its direction
+  const droneElement = document.getElementById('drone-box');
+  droneElement.style.left = `${drone.x * 50}px`;
+  droneElement.style.top = `${drone.y * 50}px`;
   droneElement.style.transform = `rotate(${getRotationAngle(
     drone.direction
   )}deg)`;
 }
 
-// Function to get the rotation angle based on direction
+// Function to get rotation angle based on direction
 function getRotationAngle(direction) {
   switch (direction) {
     case 'NORTH':

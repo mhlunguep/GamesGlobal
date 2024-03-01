@@ -6,63 +6,37 @@
       name="viewport"
       content="width=device-width, initial-scale=1.0" />
     <title>Toy Drone Simulation</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link
       rel="stylesheet"
-      href="styles.css" />
-
-    <style>
-      /* CSS Styles for Custom Pop-up */
-      .custom-popup {
-        display: none;
-        position: fixed;
-        z-index: 9999;
-        left: 0;
-        top: 0;
-        width: 100%;
-        height: 100%;
-        overflow: auto;
-        background-color: rgba(0, 0, 0, 0.4);
-      }
-
-      .popup-content {
-        background-color: #fefefe;
-        margin: 10% auto;
-        padding: 20px;
-        border: 1px solid #888;
-        width: 80%;
-        max-width: 250px;
-        position: relative;
-      }
-
-      .close {
-        color: #aaa;
-        float: right;
-        font-size: 28px;
-        font-weight: bold;
-        cursor: pointer;
-      }
-
-      .close:hover,
-      .close:focus {
-        color: black;
-        text-decoration: none;
-        cursor: pointer;
-      }
-
-      .content {
-        padding: 20px;
-      }
-    </style>
+      href="css/styles.css" />
   </head>
   <body>
     <body>
-      <div class="container">
-        <div
-          id="drone"
-          class="drone">
-          <div class="direction-indicator">N</div>
+      <div id="banner">
+        <div id="drone-box">
+          <div id="fire"></div>
+          <img
+            src="imgs/drone.png"
+            class="drone-pic" /><img
+            src="imgs/drone-left.png"
+            class="left-pic" /><img
+            src="imgs/drone-right.png"
+            class="right-pic" />
         </div>
 
+        <h2 id="attackInfo"></h2>
+
+
+        <div class="controls">
+          <button id="placeBtn"><i class="bi bi-shop"></i> &nbsp; PLACE</button>
+          <button id="moveBtn"><i class="bi bi-airplane"></i>&nbsp; MOVE</button>
+          <button id="leftBtn"><i class="bi bi-arrow-counterclockwise"></i>&nbsp; LEFT</button>
+          <button id="rightBtn"><i class="bi bi-arrow-clockwise"></i>&nbsp; RIGHT</button
+          ><button id="reportBtn"><i class="bi bi-flag"></i>&nbsp; REPORT</button
+          ><button id="attackBtn"><i class="bi bi-fire"></i>&nbsp; ATTACK</button>
+        </div>
+        
         <div
           id="customPopup"
           class="custom-popup">
@@ -76,87 +50,16 @@
               id="popupContent"
               class="content"></div>
           </div>
-        </div>
-
-        <div class="controls">
-          <button id="placeBtn">PLACE</button>
-          <button id="moveBtn">MOVE</button>
-          <button id="leftBtn">LEFT</button>
-          <button id="rightBtn">RIGHT</button>
-          <button id="reportBtn">REPORT</button>
-          <button id="attackBtn">ATTACK</button>
-        </div>
       </div>
-      <script src="script.js"></script>
+
       <script src="https://cdn.jsdelivr.net/npm/@mojs/core"></script>
-      <script src="attackButton.js"></script>
+      <script src="/js/ToyDrone.js"></script>
+      <script src="js/attackButton.js"></script>
+      <script src="js/moveButton.js"></script>
+      <script src="js/leftButton.js"></script>
+      <script src="js/rightButton.js"></script>
+      <script src="js/reportButton.js"></script>
+      <script src="js/place.js"></script>
     </body>
-
-    <script>
-      // Get references to the buttons
-      const moveButton = document.getElementById('moveBtn');
-      const leftButton = document.getElementById('leftBtn');
-      const rightButton = document.getElementById('rightBtn');
-
-      const reportButton = document.getElementById('reportBtn');
-      const attackButton = document.getElementById('attackBtn');
-
-      // Add event listeners to the buttons
-      moveButton.addEventListener('click', function () {
-        // Invoke the move method of the drone object when the MOVE button is clicked
-        drone.move();
-        // Update the position of the drone on the page
-        updateDronePosition();
-      });
-
-      leftButton.addEventListener('click', function () {
-        // Invoke the left method of the drone object when the LEFT button is clicked
-        drone.left();
-        // Update the position of the drone on the page
-        updateDronePosition();
-      });
-
-      rightButton.addEventListener('click', function () {
-        // Invoke the right method of the drone object when the RIGHT button is clicked
-        drone.right();
-        // Update the position of the drone on the page
-        updateDronePosition();
-      });
-
-      // Add event listener to the REPORT button
-      reportButton.addEventListener('click', function () {
-        // Invoke the report method of the drone object when the REPORT button is clicked
-        const reportResult = drone.report();
-
-        // Populate the pop-up content with the report result
-        document.getElementById('popupContent').innerHTML =
-          'Position of the Drone: <br>' + reportResult;
-
-        // Show the custom pop-up
-        document.getElementById('customPopup').style.display = 'block';
-      });
-
-      // Add event listener to the close button of the custom pop-up
-      document
-        .getElementById('popupClose')
-        .addEventListener('click', function () {
-          // Hide the custom pop-up when the close button is clicked
-          document.getElementById('customPopup').style.display = 'none';
-        });
-
-      // // Add event listeners to the buttons
-      // reportButton.addEventListener('click', function () {
-      //   // Invoke the report method of the drone object when the REPORT button is clicked
-      //   const reportResult = drone.report();
-      //   // Log the report result to the console
-      //   //console.log(reportResult);
-      //   alert(reportResult);
-      // });
-
-      attackButton.addEventListener('click', function () {
-        // Invoke the attack method of the drone object when the ATTACK button is clicked
-        drone.attack();
-      });
-    </script>
   </body>
 </html>
