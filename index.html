@@ -1,65 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1.0" />
-    <title>Toy Drone Simulation</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-    <link
-      rel="stylesheet"
-      href="css/styles.css" />
-  </head>
-  <body>
-    <body>
-      <div id="banner">
-        <div id="drone-box">
-          <div id="fire"></div>
-          <img
-            src="imgs/drone.png"
-            class="drone-pic" /><img
-            src="imgs/drone-left.png"
-            class="left-pic" /><img
-            src="imgs/drone-right.png"
-            class="right-pic" />
-        </div>
 
-        <h2 id="attackInfo"></h2>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Toy Drone Simulation</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
 
+<body>
+  <div id="banner">
+    <div id="drone-box">
+      <div id="fire"></div>
+      <img src="imgs/drone.png" class="drone-pic" />
+      <img src="imgs/drone-left.png" class="left-pic" />
+      <img src="imgs/drone-right.png" class="right-pic" />
+      <h2 id="attackInfo"></h2>
+    </div>
+    <div class="controls">
+      <button id="placeBtn"><i class="bi bi-shop"></i> &nbsp; PLACE</button>
+      <button id="moveBtn"><i class="bi bi-airplane"></i>&nbsp; MOVE</button>
+      <button id="leftBtn"><i class="bi bi-arrow-counterclockwise"></i>&nbsp; LEFT</button>
+      <button id="rightBtn"><i class="bi bi-arrow-clockwise"></i>&nbsp; RIGHT</button>
+      <button id="reportBtn"><i class="bi bi-flag"></i>&nbsp; REPORT</button>
+      <button id="attackBtn"><i class="bi bi-fire"></i>&nbsp; ATTACK</button>
+    </div>
+  </div>
 
-        <div class="controls">
-          <button id="placeBtn"><i class="bi bi-shop"></i> &nbsp; PLACE</button>
-          <button id="moveBtn"><i class="bi bi-airplane"></i>&nbsp; MOVE</button>
-          <button id="leftBtn"><i class="bi bi-arrow-counterclockwise"></i>&nbsp; LEFT</button>
-          <button id="rightBtn"><i class="bi bi-arrow-clockwise"></i>&nbsp; RIGHT</button
-          ><button id="reportBtn"><i class="bi bi-flag"></i>&nbsp; REPORT</button
-          ><button id="attackBtn"><i class="bi bi-fire"></i>&nbsp; ATTACK</button>
-        </div>
-        
-        <div
-          id="customPopup"
-          class="custom-popup">
-          <div class="popup-content">
-            <span
-              id="popupClose"
-              class="close"
-              >&times;</span
-            >
-            <div
-              id="popupContent"
-              class="content"></div>
-          </div>
-      </div>
+  <div id="customPopup" class="custom-popup">
+    <div class="popup-content">
+      <span id="popupClose" class="close">&times;</span>
+      <div id="popupContent" class="content"></div>
+    </div>
+  </div>
 
-      <script src="https://cdn.jsdelivr.net/npm/@mojs/core"></script>
-      <script src="/js/ToyDrone.js"></script>
-      <script src="js/attackButton.js"></script>
-      <script src="js/moveButton.js"></script>
-      <script src="js/leftButton.js"></script>
-      <script src="js/rightButton.js"></script>
-      <script src="js/reportButton.js"></script>
-      <script src="js/place.js"></script>
-    </body>
-  </body>
+  <script src='https://cdn.jsdelivr.net/npm/@mojs/core'></script>
+  <script src="/js/ToyDrone.js"></script>
+  <script src="js/attackButton.js"></script>
+  <script src="js/moveButton.js"></script>
+  <script src="js/leftButton.js"></script>
+  <script src="js/rightButton.js"></script>
+  <script src="js/reportButton.js"></script>
+  <script src="js/place.js"></script>
+</body>
+
 </html>

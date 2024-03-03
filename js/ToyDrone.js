@@ -17,6 +17,9 @@ class ToyDrone {
       this.y = y;
       this.direction = direction;
       this.isPlaced = true;
+      return true; // Indicate successful placement
+    } else {
+      return false; // Indicate failed placement
     }
   }
 
@@ -45,6 +48,9 @@ class ToyDrone {
     if (this.isValidPosition(newX, newY)) {
       this.x = newX;
       this.y = newY;
+      return true; // Indicate successful movement
+    } else {
+      return false; // Indicate failed movement
     }
   }
 
@@ -52,16 +58,14 @@ class ToyDrone {
   left() {
     if (!this.isPlaced) return;
     let index = DIRECTIONS.indexOf(this.direction);
-    index = (index - 1 + DIRECTIONS.length) % DIRECTIONS.length;
-    this.direction = DIRECTIONS[index];
+    this.direction = DIRECTIONS[(index + 3) % DIRECTIONS.length];
   }
 
   // Method to rotate the drone to the right
   right() {
     if (!this.isPlaced) return;
     let index = DIRECTIONS.indexOf(this.direction);
-    index = (index + 1) % DIRECTIONS.length;
-    this.direction = DIRECTIONS[index];
+    this.direction = DIRECTIONS[(index + 1) % DIRECTIONS.length];
   }
 
   // Method to report the position and direction of the drone
@@ -82,9 +86,25 @@ class ToyDrone {
     let attackX = this.x;
     let attackY = this.y;
 
-    let attackMessage;
+    // Update the UI element with the attack information
+    let attackMessage = '';
+    switch (this.direction) {
+      case 'NORTH':
+        attackY += 2;
+        break;
+      case 'EAST':
+        attackX += 2;
+        break;
+      case 'SOUTH':
+        attackY -= 2;
+        break;
+      case 'WEST':
+        attackX -= 2;
+        break;
+    }
+
     if (this.isValidPosition(attackX, attackY)) {
-      attackMessage = ` Projectile Fired At ${attackX},${attackY}`;
+      attackMessage = `Projectile Fired At ${attackX},${attackY}`;
     } else {
       attackMessage = 'No free spaces for attack';
     }
@@ -92,10 +112,10 @@ class ToyDrone {
     // Update the UI element with the attack information
     document.getElementById('attackInfo').innerText = attackMessage;
 
-    // Clear the message after 4 seconds
+    // Clear the message after 6 seconds
     setTimeout(function () {
       document.getElementById('attackInfo').innerText = '';
-    }, 4000); // 4000 milliseconds = 4 seconds
+    }, 6000); // 6000 milliseconds = 6 seconds
   }
 }
 
@@ -130,18 +150,6 @@ const drone = new ToyDrone();
 drone.place(0, 0, 'NORTH');
 drone.move();
 drone.left();
-drone.left();
-drone.attack();
-console.log(drone.report()); // Output: 0,1,SOUTH
 
-drone.place(0, 0, 'NORTH');
-drone.left();
-console.log(drone.report()); // Output: 0,0,WEST
-
-drone.place(1, 2, 'EAST');
-drone.move();
-drone.move();
-drone.left();
-drone.move();
-drone.attack();
-console.log(drone.report()); // Output: 3,3,NORTH
+// Update the position of the drone on the page
+updateDronePosition();
